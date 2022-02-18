@@ -1,9 +1,13 @@
+// Substituir this.state.value por this.props.value no método render;
+
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 
+
 //quadrado
 class Square extends React.Component {
+  // TODO: remove the constructor
   constructor(props) {
     super(props);
     this.state = {
@@ -12,52 +16,57 @@ class Square extends React.Component {
   }
 
   render() {
+    // TODO: use onClick={this.props.onClick}
+    // TODO: replace this.state.value with this.props.value
+    
     return (
       <button 
-      className="square"
-       onClick={() => this.setState({value: 'X'})}
-       >
+        className="square" 
+        onClick={() => this.setState({value: 'X'})}
+        >
         {this.state.value}
       </button>
-    );    
+    );
   }
 }
 
-
-
-//Tabuleiro
 class Board extends React.Component {
-  renderSquare(i) {
-    return <Square value={i} />;
+  constructor(props) {
+    super(props);
+    this.state = {
+      squares: Array(9).fill(null),
+    };
   }
 
+  renderSquare(i) {
+    return (
+      <Square 
+      value={this.state.squares[i]}
+      onClick={()=> this.handleClick(i)}
+      />
+    );    
+  }
+  
   render() {
-    const status = "Next player: X";
+    const status = 'Next player: X';
 
     return (
       <div>
         <div className="status">{status}</div>
         <div className="board-row">
-          {this.renderSquare(0)}
-          {this.renderSquare(1)}
-          {this.renderSquare(2)}
+          {this.renderSquare(0)}{this.renderSquare(1)}{this.renderSquare(2)}
         </div>
         <div className="board-row">
-          {this.renderSquare(3)}
-          {this.renderSquare(4)}
-          {this.renderSquare(5)}
+          {this.renderSquare(3)}{this.renderSquare(4)}{this.renderSquare(5)}
         </div>
         <div className="board-row">
-          {this.renderSquare(6)}
-          {this.renderSquare(7)}
-          {this.renderSquare(8)}
+          {this.renderSquare(6)}{this.renderSquare(7)}{this.renderSquare(8)}
         </div>
       </div>
     );
   }
 }
 
-//Jogo
 class Game extends React.Component {
   render() {
     return (
@@ -76,4 +85,7 @@ class Game extends React.Component {
 
 // ========================================
 
-ReactDOM.render(<Game />, document.getElementById("root"));
+ReactDOM.render(
+  <Game />,
+  document.getElementById('root')
+);
