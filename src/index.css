@@ -33,7 +33,13 @@ ul {
     text-align: center;
     width: 34px;
 }
-
+button{
+    background-color: yellow ;
+    border-radius: 5px;
+    color: rgb(0, 0, 0);
+    font-size: 12px;
+    width: 200px;
+}
 .square:focus {
     outline: none;
 }
